@@ -7,7 +7,7 @@ const dbConnect = async () => {
 
   mongoose.set("strictQuery", false);
   try {
-    await mongoose.connect(process.env.DB_URL, {
+    await mongoose.connect("mongodb://localhost:27017/pc-builder", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });

@@ -8,12 +8,11 @@ export const AuthProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(null);
 
-  const registerUser = async ({ name, email, password }) => {
+  const registerUser = async ({ email, password }) => {
     try {
       const response = await axios.post(
         `${process.env.API_URL}/api/auth/register`,
         {
-          name,
           email,
           password,
         }

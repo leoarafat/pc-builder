@@ -1,6 +1,6 @@
 import { createRouter } from "next-connect";
-import dbConnect from "../../../backend/config/dbConnenct";
-import { registerUser } from "../../../backend/controllers/authControllers";
+import dbConnect from "../../../../backend/config/dbConnenct";
+import { registerUser } from "../../../../backend/controllers/authControllers";
 
 const router = createRouter();
 
