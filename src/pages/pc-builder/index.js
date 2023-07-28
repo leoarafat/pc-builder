@@ -90,6 +90,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { usePostProductsMutation } from "@/redux/features/order/orderSlice";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
+import Loading from "@/components/ui/Loading";
 const RootLayout = dynamic(
   () => import("../../components/layouts/RootLayout"),
   {
@@ -119,14 +120,7 @@ export default function PcBuilderPage() {
     };
     await postSelectedProducts(orderData);
   };
-  if (isSuccess) {
-    toast.success("Selected products data saved successfully!");
-    router.push("/success");
-  }
-  if (isError) {
-    toast.error(`${error.data.error}`);
-    console.log(error);
-  }
+
   const handleRemove = (category, productName) => {
     removeProduct(category, productName);
   };
@@ -143,7 +137,17 @@ export default function PcBuilderPage() {
 
     return totalPrice;
   };
-
+  if (isSuccess) {
+    toast.success("Selected products data saved successfully!");
+    router.push("/success");
+  }
+  if (isError) {
+    toast.error(`${error.data.error}`);
+    console.log(error);
+  }
+  if (isLoading) {
+    <Loading />;
+  }
   return (
     <>
       <Button

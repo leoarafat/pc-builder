@@ -1,60 +1,3 @@
-// import React, { createContext, useContext, useEffect, useState } from "react";
-// import { toast } from "react-hot-toast";
-
-// const ProductContext = createContext();
-
-// export const useProductContext = () => useContext(ProductContext);
-
-// export function ProductProvider({ children }) {
-//   const [selectedProducts, setSelectedProducts] = useState({});
-
-//   useEffect(() => {
-//     const storedProducts = localStorage.getItem("selectedProducts");
-//     if (storedProducts) {
-//       setSelectedProducts(JSON.parse(storedProducts));
-//     }
-//   }, []);
-
-//   const addProduct = (product) => {
-//     const category = product?.category;
-//     console.log(category, "ccc");
-//     setSelectedProducts((prevSelectedProducts) => {
-//       const updatedSelectedProducts = { ...prevSelectedProducts };
-
-//       if (!updatedSelectedProducts[category]) {
-//         updatedSelectedProducts[category] = [product];
-//       } else {
-//         const isProductAlreadyAdded = updatedSelectedProducts[category].some(
-//           (p) => p?.name === product?.name
-//         );
-
-//         if (!isProductAlreadyAdded) {
-//           updatedSelectedProducts[category] = [
-//             ...updatedSelectedProducts[category],
-//             product,
-//           ];
-//         } else {
-//           toast.error("Already Added");
-//         }
-//       }
-
-//       localStorage.setItem(
-//         "selectedProducts",
-//         JSON.stringify(updatedSelectedProducts)
-//       );
-
-//       return updatedSelectedProducts;
-//     });
-
-//     toast.success("Product Added");
-//   };
-
-//   return (
-//     <ProductContext.Provider value={{ selectedProducts, addProduct }}>
-//       {children}
-//     </ProductContext.Provider>
-//   );
-// }
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
@@ -126,10 +69,14 @@ export function ProductProvider({ children }) {
 
     toast.success("Product Removed");
   };
+  const removeAllProducts = () => {
+    setSelectedProducts({});
+    localStorage.removeItem("selectedProducts"); //
+  };
 
   return (
     <ProductContext.Provider
-      value={{ selectedProducts, addProduct, removeProduct }}
+      value={{ selectedProducts, addProduct, removeProduct, removeAllProducts }}
     >
       {children}
     </ProductContext.Provider>
