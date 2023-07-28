@@ -87,6 +87,8 @@ import Link from "next/link";
 import { useProductContext } from "@/context/ProductContext";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { usePostProductsMutation } from "@/redux/features/order/orderSlice";
+import { toast } from "react-hot-toast";
 const RootLayout = dynamic(
   () => import("../../components/layouts/RootLayout"),
   {
@@ -96,7 +98,8 @@ const RootLayout = dynamic(
 export default function PcBuilderPage() {
   const { data } = useGetCategoryQuery(null);
   const { selectedProducts, removeProduct } = useProductContext();
-
+  const [postSelectedProducts, { isLoading, isSuccess, isError, error }] =
+    usePostProductsMutation();
   const rows = data?.category;
 
   const selectedCategories = Object.keys(selectedProducts);
@@ -108,10 +111,20 @@ export default function PcBuilderPage() {
         selectedProducts[row?.categories_name].length > 0
     );
 
-  const handleAddToCart = (product) => {
-    // Handle adding all the selected products to cart here
-    console.log(product);
+  const handleAddToCart = async (product) => {
+    const orderData = {
+      orderProducts: selectedProducts,
+    };
+
+    await postSelectedProducts(orderData);
   };
+  if (isSuccess) {
+    toast.success("Selected products data saved successfully!");
+  }
+  if (isError) {
+    toast.error(`${error.data.error}`);
+    console.log(error);
+  }
   const handleRemove = (category, productName) => {
     removeProduct(category, productName);
     console.log(category, productName);

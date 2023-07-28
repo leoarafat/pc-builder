@@ -1,10 +1,11 @@
 import Order from "../models/order";
 
 export const postOrder = async (req, res) => {
+  console.log(req.body);
   try {
     const selectedProductsData = req.body;
 
-    await Order.insertMany(selectedProductsData);
+    await Order.create(selectedProductsData);
 
     res
       .status(200)
