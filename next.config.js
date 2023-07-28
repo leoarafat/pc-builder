@@ -10,7 +10,16 @@ const nextConfig = {
     GITHUB_SECRET: "c5f5a1b326a54ed6791e34f0337da19f9115f957",
   },
   images: {
-    domains: ["images.pexels.com"],
+    domains: [
+      "images.pexels.com",
+      "www.cloud.ryanscomputers.com",
+      "techbd.com.bd",
+      "computerimporter.com",
+      "images.evga.com",
+      "www.lg.com",
+      "www.trustedreviews.com",
+      "upload.wikimedia.org",
+    ],
   },
 };
 module.exports = nextConfig;
