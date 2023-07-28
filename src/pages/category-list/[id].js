@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import * as React from "react";
 import AspectRatio from "@mui/joy/AspectRatio";
 import Box from "@mui/joy/Box";
@@ -11,7 +10,9 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useGetCategoryByNameQuery } from "@/redux/features/category/categoryApi";
 import { useRouter } from "next/router";
-import Image from "next/image";
+import { useProductContext } from "@/context/ProductContext";
+import { toast } from "react-hot-toast";
+
 const RootLayout = dynamic(
   () => import("../../components/layouts/RootLayout"),
   {
@@ -19,13 +20,15 @@ const RootLayout = dynamic(
   }
 );
 const ProductList = () => {
+  const { addProduct } = useProductContext();
   const router = useRouter();
   const id = router.query.id;
   const { data } = useGetCategoryByNameQuery(id);
   const products = data?.category?.products;
 
-  const handleAdd = (e) => {
-    console.log(e);
+  const handleAdd = (product) => {
+    addProduct(product);
+    router.push("/pc-builder");
   };
 
   return (
