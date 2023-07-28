@@ -89,6 +89,7 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { usePostProductsMutation } from "@/redux/features/order/orderSlice";
 import { toast } from "react-hot-toast";
+import { useRouter } from "next/router";
 const RootLayout = dynamic(
   () => import("../../components/layouts/RootLayout"),
   {
@@ -97,6 +98,7 @@ const RootLayout = dynamic(
 );
 export default function PcBuilderPage() {
   const { data } = useGetCategoryQuery(null);
+  const router = useRouter();
   const { selectedProducts, removeProduct } = useProductContext();
   const [postSelectedProducts, { isLoading, isSuccess, isError, error }] =
     usePostProductsMutation();
@@ -111,15 +113,15 @@ export default function PcBuilderPage() {
         selectedProducts[row?.categories_name].length > 0
     );
 
-  const handleAddToCart = async (product) => {
+  const handleAddToCart = async () => {
     const orderData = {
       orderProducts: selectedProducts,
     };
-
     await postSelectedProducts(orderData);
   };
   if (isSuccess) {
     toast.success("Selected products data saved successfully!");
+    router.push("/success");
   }
   if (isError) {
     toast.error(`${error.data.error}`);
@@ -127,7 +129,6 @@ export default function PcBuilderPage() {
   }
   const handleRemove = (category, productName) => {
     removeProduct(category, productName);
-    console.log(category, productName);
   };
 
   const getTotalPrice = () => {

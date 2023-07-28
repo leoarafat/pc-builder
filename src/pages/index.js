@@ -3,7 +3,7 @@ import React from "react";
 import dynamic from "next/dynamic";
 import AllProducts from "@/components/Products/Products";
 import Category from "../pages/category/index";
-import ProductCategory from "@/components/category/ProductCategory";
+
 import { useGetCategoryQuery } from "@/redux/features/category/categoryApi";
 import HeroSection from "@/components/ui/Hero";
 import Footer from "@/components/ui/Footer";

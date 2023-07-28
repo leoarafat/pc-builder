@@ -6,8 +6,8 @@ const nextConfig = {
     NEXTAUTH_URL: "http://localhost:3000",
     DB_URL: "mongodb://localhost:27017/pc-builder",
     API_URL: "http://localhost:3000",
-    GITHUB_ID: "8bf68c6c7037fb156343",
-    GITHUB_SECRET: "c5f5a1b326a54ed6791e34f0337da19f9115f957",
+    GITHUB_ID: "",
+    GITHUB_SECRET: "",
   },
   images: {
     domains: [
@@ -26,6 +26,7 @@ const nextConfig = {
       "m.media-amazon.com",
       "www.techlandbd.com",
       "www.elnekhelytechnology.com",
+      "www.pngmart.com",
     ],
   },
 };
