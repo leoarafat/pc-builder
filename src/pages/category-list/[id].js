@@ -12,6 +12,7 @@ import { useGetCategoryByNameQuery } from "@/redux/features/category/categoryApi
 import { useRouter } from "next/router";
 import { useProductContext } from "@/context/ProductContext";
 import { toast } from "react-hot-toast";
+import Image from "next/image";
 
 const RootLayout = dynamic(
   () => import("../../components/layouts/RootLayout"),
@@ -92,11 +93,13 @@ const ProductList = () => {
               maxHeight={182}
               sx={{ minWidth: 182, flex: 1 }}
             >
-              <img
+              <Image
+                height={300}
+                width={300}
                 src={product.image}
                 srcSet="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286&dpr=2 2x"
                 loading="lazy"
-                alt={product.categories_name}
+                alt={product.name}
               />
             </AspectRatio>
             <CardContent>
@@ -108,7 +111,7 @@ const ProductList = () => {
                 fontWeight="lg"
                 textColor="text.tertiary"
               >
-                Senior Journalist
+                {product.name}
               </Typography>
               <Sheet
                 sx={{
@@ -123,21 +126,23 @@ const ProductList = () => {
               >
                 <div>
                   <Typography level="body3" fontWeight="lg">
-                    Articles
+                    Price
                   </Typography>
-                  <Typography fontWeight="lg">34</Typography>
+                  <Typography fontWeight="lg">${product.price}</Typography>
                 </div>
                 <div>
                   <Typography level="body3" fontWeight="lg">
-                    Followers
+                    Status
                   </Typography>
-                  <Typography fontWeight="lg">980</Typography>
+                  <Typography fontWeight="lg">{product.status}</Typography>
                 </div>
                 <div>
                   <Typography level="body3" fontWeight="lg">
-                    Rating
+                    Average Rating
                   </Typography>
-                  <Typography fontWeight="lg">8.9</Typography>
+                  <Typography fontWeight="lg">
+                    {product.average_rating}
+                  </Typography>
                 </div>
               </Sheet>
               <Box

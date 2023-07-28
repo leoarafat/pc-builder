@@ -20,6 +20,12 @@ const nextConfig = {
       "www.trustedreviews.com",
       "upload.wikimedia.org",
       "www.startech.com.bd",
+      "asset.msi.com",
+      "www.skyland.com.bd",
+      "www.gskill.com",
+      "m.media-amazon.com",
+      "www.techlandbd.com",
+      "www.elnekhelytechnology.com",
     ],
   },
 };

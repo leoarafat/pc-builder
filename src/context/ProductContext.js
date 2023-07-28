@@ -6,9 +6,8 @@
 // export const useProductContext = () => useContext(ProductContext);
 
 // export function ProductProvider({ children }) {
-//   const [selectedProducts, setSelectedProducts] = useState([]);
+//   const [selectedProducts, setSelectedProducts] = useState({});
 
-//   // Load selected products from local storage on initial render
 //   useEffect(() => {
 //     const storedProducts = localStorage.getItem("selectedProducts");
 //     if (storedProducts) {
@@ -17,24 +16,37 @@
 //   }, []);
 
 //   const addProduct = (product) => {
-//     const isProductAlreadyAdded = selectedProducts.some(
-//       (p) => p?.name === product?.name
-//     );
+//     const category = product?.category;
+//     console.log(category, "ccc");
+//     setSelectedProducts((prevSelectedProducts) => {
+//       const updatedSelectedProducts = { ...prevSelectedProducts };
 
-//     if (!isProductAlreadyAdded) {
-//       // Add the product to selected products list
-//       setSelectedProducts((prevSelectedProducts) => [
-//         ...prevSelectedProducts,
-//         product,
-//       ]);
-//       toast.success("Product Added");
+//       if (!updatedSelectedProducts[category]) {
+//         updatedSelectedProducts[category] = [product];
+//       } else {
+//         const isProductAlreadyAdded = updatedSelectedProducts[category].some(
+//           (p) => p?.name === product?.name
+//         );
+
+//         if (!isProductAlreadyAdded) {
+//           updatedSelectedProducts[category] = [
+//             ...updatedSelectedProducts[category],
+//             product,
+//           ];
+//         } else {
+//           toast.error("Already Added");
+//         }
+//       }
+
 //       localStorage.setItem(
 //         "selectedProducts",
-//         JSON.stringify([...selectedProducts, product])
+//         JSON.stringify(updatedSelectedProducts)
 //       );
-//     } else {
-//       toast.error("Already Added");
-//     }
+
+//       return updatedSelectedProducts;
+//     });
+
+//     toast.success("Product Added");
 //   };
 
 //   return (
@@ -94,8 +106,31 @@ export function ProductProvider({ children }) {
     toast.success("Product Added");
   };
 
+  const removeProduct = (category, productName) => {
+    setSelectedProducts((prevSelectedProducts) => {
+      const updatedSelectedProducts = { ...prevSelectedProducts };
+
+      if (updatedSelectedProducts[category]) {
+        updatedSelectedProducts[category] = updatedSelectedProducts[
+          category
+        ].filter((product) => product?.name !== productName);
+      }
+
+      localStorage.setItem(
+        "selectedProducts",
+        JSON.stringify(updatedSelectedProducts)
+      );
+
+      return updatedSelectedProducts;
+    });
+
+    toast.success("Product Removed");
+  };
+
   return (
-    <ProductContext.Provider value={{ selectedProducts, addProduct }}>
+    <ProductContext.Provider
+      value={{ selectedProducts, addProduct, removeProduct }}
+    >
       {children}
     </ProductContext.Provider>
   );

@@ -9,7 +9,7 @@
                 "image": "https://www.cloud.ryanscomputers.com/cdn/products/main/bundle-with-pc-intel-11th-gen-rocket-lake-core-11617172224.webp",
                 "category": "CPU / Processor",
                 "status": "In Stock",
-                "price": "$399.99",
+                "price": "399.99",
                 "description": "The Intel Core i7-11700K is a powerful CPU designed for high-performance computing.",
                 "key_features": {
                     "Brand": "Intel",
@@ -40,7 +40,7 @@
                 "image": "https://www.startech.com.bd/image/cache/catalog/processor/amd/ryzen-9-5900x/ryzen-9-5900x-001-500x500.jpg",
                 "category": "CPU / Processor",
                 "status": "In Stock",
-                "price": "$499.99",
+                "price": "499.99",
                 "description": "The AMD Ryzen 9 5900X is a high-end CPU with exceptional multi-core performance.",
                 "key_features": {
                     "Brand": "AMD",
@@ -71,7 +71,7 @@
                 "image": "https://www.startech.com.bd/image/cache/catalog/processor/Intel/i5-11600k/i5-11600k-500x500.jpg",
                 "category": "CPU / Processor",
                 "status": "Out of Stock",
-                "price": "$299.99",
+                "price": "299.99",
                 "description": "The Intel Core i5-11600K is a reliable CPU for mainstream computing needs.",
                 "key_features": {
                     "Brand": "Intel",
@@ -108,7 +108,7 @@
                 "image": "https://techbd.com.bd/wp-content/uploads/2021/04/rog-stix-b550f-wifi-5-500x500-1.jpg",
                 "category": "Motherboard",
                 "status": "In Stock",
-                "price": "$199.99",
+                "price": "199.99",
                 "description": "The ASUS ROG Strix B550-F Gaming is a feature-rich motherboard for gaming enthusiasts.",
                 "key_features": {
                     "Brand": "ASUS",
@@ -142,7 +142,7 @@
                 "image": "https://asset.msi.com/resize/image/global/product/product_161095891448135c9bfcadb2e77a3efa13a6213a37.png62405b38c58fe0f07fcef2367d8a9ba1/1024.png",
                 "category": "Motherboard",
                 "status": "In Stock",
-                "price": "$249.99",
+                "price": "249.99",
                 "description": "The MSI MPG Z590 Gaming Carbon WiFi is a high-performance motherboard with wireless connectivity.",
                 "key_features": {
                     "Brand": "MSI",
@@ -176,7 +176,7 @@
                 "image": "https://www.skyland.com.bd/wp-content/uploads/2021/01/gigabyte-b450-aorus-elite-v2-1.png",
                 "category": "Motherboard",
                 "status": "Out of Stock",
-                "price": "$129.99",
+                "price": "129.99",
                 "description": "The GIGABYTE B450 AORUS Elite is a reliable motherboard for budget-conscious gamers.",
                 "key_features": {
                     "Brand": "GIGABYTE",
@@ -216,7 +216,7 @@
                 "image": "https://computerimporter.com/wp-content/uploads/2022/03/16gb-ddr4-500x500-1-1200x900.jpg",
                 "category": "RAM",
                 "status": "In Stock",
-                "price": "$79.99",
+                "price": "79.99",
                 "description": "The Corsair Vengeance LPX 16GB DDR4 RAM offers high-speed performance for gaming and multitasking.",
                 "key_features": {
                     "Brand": "Corsair",
@@ -249,7 +249,7 @@
                 "image": "https://www.gskill.com/_upload/images/156284052513.png",
                 "category": "RAM",
                 "status": "In Stock",
-                "price": "$129.99",
+                "price": "129.99",
                 "description": "The G.SKILL Trident Z Neo 32GB DDR4 RAM delivers top-notch performance and RGB lighting.",
                 "key_features": {
                     "Brand": "G.SKILL",
@@ -282,7 +282,7 @@
                 "image": "https://m.media-amazon.com/images/I/611O7coTfwS.jpg",
                 "category": "RAM",
                 "status": "Out of Stock",
-                "price": "$59.99",
+                "price": "59.99",
                 "description": "The Crucial Ballistix 8GB DDR4 RAM offers reliable performance for budget gaming setups.",
                 "key_features": {
                     "Brand": "Crucial",
@@ -321,7 +321,7 @@
                 "image": "https://images.evga.com/products/gallery//png/220-G5-0750-X2_XL_1.png",
                 "category": "Power Supply Unit",
                 "status": "In Stock",
-                "price": "$119.99",
+                "price": "119.99",
                 "description": "The EVGA Supernova 750 G5 is a high-quality power supply with excellent efficiency and reliability.",
                 "key_features": {
                     "Brand": "EVGA",
@@ -353,7 +353,7 @@
                 "image": "https://www.techlandbd.com/image/catalog/Power-Supply/Corsair/RM850x%20White/corsair-rm850x-850-watt-power-supply-1.jpg",
                 "category": "Power Supply Unit",
                 "status": "Out of Stock",
-                "price": "$139.99",
+                "price": "139.99",
                 "description": "The Corsair RM850x is a high-end power supply with high efficiency and low noise operation.",
                 "key_features": {
                     "Brand": "Corsair",
@@ -385,7 +385,7 @@
                 "image": "https://www.elnekhelytechnology.com/image/cache/catalog/PSU/Seasonic/seasonic-s12ii-620-watt-80-plus-bronze-certified-psu-1000x1000.png",
                 "category": "Power Supply Unit",
                 "status": "In Stock",
-                "price": "$69.99",
+                "price": "69.99",
                 "description": "The Seasonic S12III 550W is an affordable power supply with stable and efficient performance.",
                 "key_features": {
                     "Brand": "Seasonic",
@@ -423,7 +423,7 @@
                 "image": "https://www.cloud.ryanscomputers.com/cdn/products/main/samsung-970-evo-plus-nvme-500gb-m2-2280-pcie-gen-41583840849.webp",
                 "category": "Storage Device",
                 "status": "In Stock",
-                "price": "$89.99",
+                "price": "89.99",
                 "description": "The Samsung 970 EVO Plus NVMe SSD offers lightning-fast read/write speeds and reliable performance.",
                 "key_features": {
                     "Brand": "Samsung",
@@ -455,7 +455,7 @@
                 "image": "https://www.cloud.ryanscomputers.com/cdn/products/main/crucial-mx500-1tb-25-inch-7mm-sataiii-ssd-21679229358.webp",
                 "category": "Storage Device",
                 "status": "In Stock",
-                "price": "$109.99",
+                "price": "109.99",
                 "description": "The Crucial MX500 SATA SSD provides reliable storage and excellent value for money.",
                 "key_features": {
                     "Brand": "Crucial",
@@ -487,7 +487,7 @@
                 "image": "https://www.cloud.ryanscomputers.com/cdn/products/main/seagate-2tb-sata-5400rpm-35-inch-barracuda35-hdd-11548652057.webp",
                 "category": "Storage Device",
                 "status": "In Stock",
-                "price": "$69.99",
+                "price": "69.99",
                 "description": "The Seagate BarraCuda 2TB HDD offers ample storage space for your data and multimedia files.",
                 "key_features": {
                     "Brand": "Seagate",
@@ -524,7 +524,7 @@
                 "image": "https://www.lg.com/content/dam/channel/wcms/uk/images/monitors/27GL850-B_AEK_EEUK_UK_C/gallery/medium01.jpg",
                 "category": "Monitor",
                 "status": "In Stock",
-                "price": "$499.99",
+                "price": "499.99",
                 "description": "The LG 27GL850-B is a high-performance gaming monitor with a QHD resolution and fast refresh rates.",
                 "key_features": {
                     "Brand": "LG",
@@ -557,7 +557,7 @@
                 "image": "https://www.cloud.ryanscomputers.com/cdn/products/main/asus-tuf-gaming-vg27aq-27-inch-2k-wqhd-41581414744.webp",
                 "category": "Monitor",
                 "status": "In Stock",
-                "price": "$549.99",
+                "price": "549.99",
                 "description": "The ASUS TUF Gaming VG27AQ offers excellent gaming performance and adaptive sync technology.",
                 "key_features": {
                     "Brand": "ASUS",
@@ -590,7 +590,7 @@
                 "image": "https://m.media-amazon.com/images/I/91u-JxjgBoL.jpg",
                 "category": "Monitor",
                 "status": "Out of Stock",
-                "price": "$159.99",
+                "price": "159.99",
                 "description": "The Acer R240HY is a budget-friendly monitor with a Full HD resolution and slim bezels.",
                 "key_features": {
                     "Brand": "Acer",
