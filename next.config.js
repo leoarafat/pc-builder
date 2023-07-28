@@ -19,6 +19,7 @@ const nextConfig = {
       "www.lg.com",
       "www.trustedreviews.com",
       "upload.wikimedia.org",
+      "www.startech.com.bd",
     ],
   },
 };
