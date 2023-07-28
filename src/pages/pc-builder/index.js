@@ -1,5 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import * as React from "react";
 import dynamic from "next/dynamic";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import Button from "@mui/joy/Button";
+import Add from "@mui/icons-material/Add";
+import { useGetCategoryQuery } from "@/redux/features/category/categoryApi";
+import Link from "next/link";
 const RootLayout = dynamic(
   () => import("../../components/layouts/RootLayout"),
   {
@@ -7,86 +18,41 @@ const RootLayout = dynamic(
   }
 );
 
-import { Avatar, Button, List, Skeleton } from 'antd';
+export default function PcBuilderPage() {
+  const { data } = useGetCategoryQuery(null);
 
-
-
-const count = 3;
-const fakeDataUrl = `https://randomuser.me/api/?results=${count}&inc=name,gender,email,nat,picture&noinfo`;
-
-const PcBuilderPage = () => {
-  const [initLoading, setInitLoading] = useState(true);
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState([]);
-  const [list, setList] = useState([]);
-
-  useEffect(() => {
-    fetch(fakeDataUrl)
-      .then((res) => res.json())
-      .then((res) => {
-        setInitLoading(false);
-        setData(res.results);
-        setList(res.results);
-      });
-  }, []);
-
-  const onLoadMore = () => {
-    setLoading(true);
-    setList(
-      data.concat([...new Array(count)].map(() => ({ loading: true, name: {}, picture: {} }))),
-    );
-    fetch(fakeDataUrl)
-      .then((res) => res.json())
-      .then((res) => {
-        const newData = data.concat(res.results);
-        setData(newData);
-        setList(newData);
-        setLoading(false);
-
-        window.dispatchEvent(new Event('resize'));
-      });
-  };
-
-  const loadMore =
-    !initLoading && !loading ? (
-      <div
-        style={{
-          textAlign: 'center',
-          marginTop: 12,
-          height: 32,
-          lineHeight: '32px',
-        }}
-      >
-        <Button onClick={onLoadMore}>loading more</Button>
-      </div>
-    ) : null;
+  const rows = data?.category;
 
   return (
-    <List
-      className="demo-loadmore-list"
-      loading={initLoading}
-      itemLayout="horizontal"
-      loadMore={loadMore}
-      dataSource={list}
-      renderItem={(item) => (
-        <List.Item
-          actions={[<a key="list-loadmore-edit">edit</a>, <a key="list-loadmore-more">more</a>]}
-        >
-          <Skeleton avatar title={false} loading={item.loading} active>
-            <List.Item.Meta
-              avatar={<Avatar src={item.picture.large} />}
-              title={<a href="https://ant.design">{item.name?.last}</a>}
-              description="Ant Design, a design language for background applications, is refined by Ant UED Team"
-            />
-            <div>content</div>
-          </Skeleton>
-        </List.Item>
-      )}
-    />
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Devices</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows?.map((row) => (
+            <TableRow
+              key={row?.categories_name}
+              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+                {row.categories_name}
+              </TableCell>
+              <TableCell align="right">
+                <Link href={`/category-list/${row._id}`}>
+                  {" "}
+                  <Button startDecorator={<Add />}>Choose</Button>
+                </Link>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
-};
-
-export default PcBuilderPage;
+}
 
 PcBuilderPage.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>;
