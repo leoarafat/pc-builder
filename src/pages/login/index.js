@@ -10,12 +10,15 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import Link from "next/link"; // Import Link from Next.js
 import { useRouter } from "next/router";
-
 import { signIn } from "next-auth/react";
-
 import { toast } from "react-hot-toast";
-import RootLayout from "../../../components/layouts/RootLayout";
-
+import dynamic from "next/dynamic";
+const RootLayout = dynamic(
+  () => import("../../../components/layouts/RootLayout"),
+  {
+    ssr: false,
+  }
+);
 const Login = () => {
   const { control, handleSubmit } = useForm();
   const router = useRouter();

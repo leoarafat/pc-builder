@@ -1,125 +1,276 @@
-import {
-  LoginOutlined,
-  DoubleRightOutlined,
-  CommentOutlined,
-  FacebookFilled,
-  LinkedinFilled,
-  GoogleSquareFilled,
-  TwitterSquareFilled,
-} from "@ant-design/icons";
-import { Button, Layout, Menu } from "antd";
-const { Header, Content, Footer } = Layout;
-import styles from "@/styles/Home.module.css";
+import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Button,
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import HomeIcon from "@mui/icons-material/Home";
 
-const RootLayout = ({ children }) => {
+import CategoryIcon from "@mui/icons-material/Category";
+import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from "@mui/icons-material/Logout";
+
+import { useSession, signOut } from "next-auth/react";
+import AuthContext from "../../context/AuthContext";
+import ImportantDevicesIcon from "@mui/icons-material/ImportantDevices";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+const Navbar = ({ children }) => {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const { user, setUser } = useContext(AuthContext);
+  const { data } = useSession();
   const { data: session } = useSession();
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const theme = useTheme();
+  const isXs = useMediaQuery(theme.breakpoints.down("xs"));
+  const isSm = useMediaQuery(theme.breakpoints.between("sm", "md"));
+  const isLg = useMediaQuery(theme.breakpoints.up("lg"));
+
+  const toggleDrawer = (open) => (event) => {
+    if (
+      event &&
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setDrawerOpen(open);
+  };
+
+  const handleLogout = async () => {
+    await signOut();
+  };
+
+  useEffect(() => {
+    if (data) {
+      setUser(data?.user);
+    }
+  }, [data, setUser]);
+  const categoryItem = [
+    {
+      name: "CPU / Processor",
+    },
+    {
+      name: "Motherboard",
+    },
+    {
+      name: "RAM",
+    },
+    {
+      name: "Power Supply Unit",
+    },
+    {
+      name: "Storage Device",
+    },
+    {
+      name: "Monitor",
+    },
+  ];
+
+  const navItems = [
+    {
+      text: "Home",
+      icon: <HomeIcon style={{ color: "#f1f8e9" }} />,
+      path: "/",
+    },
+    {
+      text: "PC Builder",
+      icon: <ImportantDevicesIcon style={{ color: "#f1f8e9" }} />,
+      path: "/pc-builder",
+    },
+  ];
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
-    <Layout>
-      <Header
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-      >
-        <div className="brand-logo">
-          <h1>
-            <Link
-              href="/"
-              style={{
-                color: "white",
-                backgroundColor: "#404040",
-                padding: "5px 10px",
-                borderRadius: "3px",
-              }}
+    <>
+      <AppBar position="static" color={"primary"}>
+        <Toolbar>
+          {isXs || isSm ? (
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              onClick={toggleDrawer(true)}
+              sx={{ mr: 2 }}
             >
-              AP Blog
-            </Link>
-          </h1>
-        </div>
-        <Menu theme="dark" mode="vertical" className={styles.menu_items}>
-          <Link href="/feedback">
-            <items
-              style={{
-                margin: "0px 25px",
-              }}
-            >
-              <CommentOutlined />
-              Feedbacks
-            </items>
-          </Link>
-          <Link href="/dashboard">
-            <items>
-              <DoubleRightOutlined />
-              Dashboard
-            </items>
-          </Link>
-          {session?.user ? (
-            <items>
-              <Button
-                onClick={async () => {
-                  const success = await signOut();
-                  if (success) {
-                    alert("You are sign out");
-                  }
-                }}
-              >
-                <LoginOutlined />
-                Logout
-              </Button>
-            </items>
+              <MenuIcon />
+            </IconButton>
           ) : (
-            <Link href="/login">
-              <items>
-                <LoginOutlined />
-                Login
-              </items>
-            </Link>
+            <>
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                <Link href={"/"}>
+                  <Button style={{ color: "#f1f8e9" }}>Build Your PC</Button>
+                </Link>
+              </Typography>
+              <List
+                component="nav"
+                aria-labelledby="main navigation"
+                sx={{ display: isLg ? "flex" : "none" }}
+              >
+                <Button
+                  color="inherit"
+                  id="demo-positioned-button"
+                  aria-controls={open ? "demo-positioned-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? "true" : undefined}
+                  onClick={handleClick}
+                >
+                  <CategoryIcon />
+                  Categories
+                </Button>
+                <Menu
+                  id="demo-positioned-menu"
+                  aria-labelledby="demo-positioned-button"
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "left",
+                  }}
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "left",
+                  }}
+                >
+                  {categoryItem.map((c) => (
+                    <>
+                      <MenuItem onClick={handleClose}>{c.name}</MenuItem>
+                    </>
+                  ))}
+                </Menu>
+                {navItems.map((item) => (
+                  <Link href={item.path} key={item.text}>
+                    <Button style={{ color: "#f1f8e9" }}>
+                      <ListItem button component="a">
+                        <ListItemIcon>{item.icon}</ListItemIcon>
+                        <ListItemText primary={item.text} />
+                      </ListItem>
+                    </Button>
+                  </Link>
+                ))}
+              </List>
+
+              <div>
+                {session?.user ? (
+                  <Button style={{ color: "#f1f8e9" }} onClick={handleLogout}>
+                    <LogoutIcon />
+                    Logout
+                  </Button>
+                ) : (
+                  <Link href="/login">
+                    <Button style={{ color: "#f1f8e9" }}>
+                      <LoginIcon />
+                      Login
+                    </Button>
+                  </Link>
+                )}
+              </div>
+            </>
           )}
-        </Menu>
-      </Header>
+        </Toolbar>
+      </AppBar>
 
-      <Content
-        style={{
-          padding: "0 24px",
-          minHeight: "100vh",
-        }}
+      <Drawer
+        anchor="left"
+        open={drawerOpen}
+        onClose={toggleDrawer(false)}
+        variant={isLg ? "permanent" : "temporary"}
+        sx={{ display: isXs || isSm ? "block" : "none" }}
       >
-        {children}
-      </Content>
-
-      <Footer
-        style={{
-          textAlign: "center",
-        }}
-      >
-        <div className={styles.line}></div>
-        <h2
-          style={{
-            fontSize: "28px",
-          }}
+        <div
+          role="presentation"
+          onClick={toggleDrawer(false)}
+          onKeyDown={toggleDrawer(false)}
         >
-          AP Blog
-        </h2>
-        <p className={styles.social_icons}>
-          <Link href="#">
-            <FacebookFilled />
-          </Link>
-          <Link href="www.twitter.com">
-            <TwitterSquareFilled />
-          </Link>
-          <Link href="#">
-            <GoogleSquareFilled />
-          </Link>
-          <Link href="www.linkedin.com">
-            <LinkedinFilled />
-          </Link>
-        </p>
-        ap blog ©2023 Created by Arafat
-      </Footer>
-    </Layout>
+          <List>
+            {navItems.map((item) => (
+              <Link href={item.path} key={item.text}>
+                <Button>
+                  <ListItem button component="a">
+                    <ListItemIcon>{item.icon}</ListItemIcon>
+                    <ListItemText primary={item.text} />
+                  </ListItem>
+                </Button>
+              </Link>
+            ))}
+          </List>
+          <List>
+            {session?.user ? (
+              <Button onClick={handleLogout}>
+                <ListItem button component="a">
+                  <LogoutIcon />
+                  <ListItemText primary={"Logout"} />
+                </ListItem>
+              </Button>
+            ) : (
+              <Link href="/login">
+                <Button>
+                  <ListItem button component="a">
+                    <LoginIcon />
+                    <ListItemText primary={"                  Login"} />
+                  </ListItem>
+                </Button>
+              </Link>
+            )}
+
+            <Button
+              id="demo-positioned-button"
+              aria-controls={open ? "demo-positioned-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={handleClick}
+            >
+              <ListItem button component="a">
+                <CategoryIcon />
+                <ListItemText primary={"                  Categories"} />
+              </ListItem>
+            </Button>
+            <Menu
+              id="demo-positioned-menu"
+              aria-labelledby="demo-positioned-button"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+            >
+              {categoryItem.map((c) => (
+                <>
+                  <MenuItem onClick={handleClose}>{c.name}</MenuItem>
+                </>
+              ))}
+            </Menu>
+          </List>
+        </div>
+      </Drawer>
+      {children}
+    </>
   );
 };
-export default RootLayout;
+
+export default Navbar;

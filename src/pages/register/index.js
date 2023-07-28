@@ -7,13 +7,19 @@ import {
   GithubOutlined,
   GoogleOutlined,
 } from "@ant-design/icons";
+import dynamic from "next/dynamic";
 import { useForm, Controller } from "react-hook-form";
 import Link from "next/link";
-import RootLayout from "../../../components/layouts/RootLayout";
+
 import AuthContext from "../../../context/AuthContext";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
-
+const RootLayout = dynamic(
+  () => import("../../../components/layouts/RootLayout"),
+  {
+    ssr: false,
+  }
+);
 const Register = () => {
   const { control, handleSubmit } = useForm();
   const { error, registerUser, clearErrors, user, loading } =
@@ -21,31 +27,53 @@ const Register = () => {
   const router = useRouter();
   const onSubmit = (data) => {
     registerUser({
+      name: data?.name,
       email: data?.email,
       password: data?.password,
     });
+    if (!error) {
+      router.push("/login");
+      toast.success("User Created Successful");
+    }
   };
   if (error) {
     toast.error(error);
   }
-  // if (!error) {
-  //   router.push("/");
-  // }
+
   if (loading) {
     return <p>Loading...</p>;
   }
-  if (user) {
-    return (
-      <div>
-        <p>Registered User: {user.user.email}</p>
-      </div>
-    );
-  }
+
   return (
     <Row justify="center" align="middle" style={{ minHeight: "100vh" }}>
       <Col xs={20} sm={16} md={12} lg={8}>
         <Card title="Register" style={{ textAlign: "center" }}>
           <Form onFinish={handleSubmit(onSubmit)}>
+            <Form.Item>
+              <Controller
+                name="name"
+                control={control}
+                defaultValue=""
+                rules={{ required: "Username is required" }}
+                render={({ field, fieldState }) => (
+                  <Input
+                    {...field}
+                    prefix={<UserOutlined />}
+                    placeholder="Username"
+                    size="large"
+                    autoFocus
+                    autoComplete="off"
+                    addonAfter={
+                      fieldState.error && fieldState.touched ? (
+                        <span style={{ color: "red" }}>
+                          {fieldState.error.message}
+                        </span>
+                      ) : null
+                    }
+                  />
+                )}
+              />
+            </Form.Item>
             <Form.Item>
               <Controller
                 name="email"
