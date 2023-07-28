@@ -7,7 +7,13 @@ import {
   CardMedia,
   Grid,
 } from "@mui/material";
-
+import dynamic from "next/dynamic";
+const RootLayout = dynamic(
+  () => import("../../components/layouts/RootLayout"),
+  {
+    ssr: false,
+  }
+);
 const ProductDetails = ({ product }) => {
   return (
     <Box
@@ -93,6 +99,10 @@ const ProductDetails = ({ product }) => {
 };
 
 export default ProductDetails;
+
+ProductDetails.getLayout = function getLayout(page) {
+  return <RootLayout>{page}</RootLayout>;
+};
 
 export async function getStaticPaths() {
   const res = await fetch(`http://localhost:3000/api/products`);

@@ -13,7 +13,13 @@ import {
 } from "@mui/material";
 
 import Link from "next/link";
-
+import dynamic from "next/dynamic";
+const RootLayout = dynamic(
+  () => import("../../components/layouts/RootLayout"),
+  {
+    ssr: false,
+  }
+);
 const CategoryProducts = () => {
   const router = useRouter();
   const id = router.query.id;
@@ -117,3 +123,6 @@ const CategoryProducts = () => {
 };
 
 export default CategoryProducts;
+CategoryProducts.getLayout = function getLayout(page) {
+  return <RootLayout>{page}</RootLayout>;
+};

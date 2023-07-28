@@ -14,7 +14,7 @@ import { signIn } from "next-auth/react";
 import { toast } from "react-hot-toast";
 import dynamic from "next/dynamic";
 const RootLayout = dynamic(
-  () => import("../../../components/layouts/RootLayout"),
+  () => import("../../components/layouts/RootLayout"),
   {
     ssr: false,
   }

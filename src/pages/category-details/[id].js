@@ -8,6 +8,13 @@ import {
   CardMedia,
   Grid,
 } from "@mui/material";
+import dynamic from "next/dynamic";
+const RootLayout = dynamic(
+  () => import("../../components/layouts/RootLayout"),
+  {
+    ssr: false,
+  }
+);
 
 const CategoryProductDetails = () => {
   const router = useRouter();
@@ -96,3 +103,6 @@ const CategoryProductDetails = () => {
   );
 };
 export default CategoryProductDetails;
+CategoryProductDetails.getLayout = function getLayout(page) {
+  return <RootLayout>{page}</RootLayout>;
+};

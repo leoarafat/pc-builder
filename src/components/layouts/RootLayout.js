@@ -26,7 +26,9 @@ import AuthContext from "../../context/AuthContext";
 import ImportantDevicesIcon from "@mui/icons-material/ImportantDevices";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { useGetCategoryQuery } from "@/redux/features/category/categoryApi";
 const Navbar = ({ children }) => {
+  const { data: categoryItem } = useGetCategoryQuery(null);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const { user, setUser } = useContext(AuthContext);
@@ -59,33 +61,8 @@ const Navbar = ({ children }) => {
       setUser(data?.user);
     }
   }, [data, setUser]);
-  const categoryItem = [
-    {
-      name: "CPU / Processor",
-    },
-    {
-      name: "Motherboard",
-    },
-    {
-      name: "RAM",
-    },
-    {
-      name: "Power Supply Unit",
-    },
-    {
-      name: "Storage Device",
-    },
-    {
-      name: "Monitor",
-    },
-  ];
 
   const navItems = [
-    {
-      text: "Home",
-      icon: <HomeIcon style={{ color: "#f1f8e9" }} />,
-      path: "/",
-    },
     {
       text: "PC Builder",
       icon: <ImportantDevicesIcon style={{ color: "#f1f8e9" }} />,
@@ -151,9 +128,16 @@ const Navbar = ({ children }) => {
                     horizontal: "left",
                   }}
                 >
-                  {categoryItem.map((c) => (
+                  {categoryItem?.category?.map((c) => (
                     <>
-                      <MenuItem onClick={handleClose}>{c.name}</MenuItem>
+                      <Link
+                        style={{ textDecoration: "none" }}
+                        href={`/category/${c._id}`}
+                      >
+                        <MenuItem onClick={handleClose}>
+                          {c.categories_name}
+                        </MenuItem>
+                      </Link>
                     </>
                   ))}
                 </Menu>
@@ -259,9 +243,16 @@ const Navbar = ({ children }) => {
                 horizontal: "left",
               }}
             >
-              {categoryItem.map((c) => (
+              {categoryItem?.category?.map((c) => (
                 <>
-                  <MenuItem onClick={handleClose}>{c.name}</MenuItem>
+                  <Link
+                    style={{ textDecoration: "none" }}
+                    href={`/category/${c._id}`}
+                  >
+                    <MenuItem onClick={handleClose}>
+                      {c.categories_name}
+                    </MenuItem>
+                  </Link>
                 </>
               ))}
             </Menu>

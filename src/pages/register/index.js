@@ -7,15 +7,15 @@ import {
   GithubOutlined,
   GoogleOutlined,
 } from "@ant-design/icons";
-import dynamic from "next/dynamic";
 import { useForm, Controller } from "react-hook-form";
 import Link from "next/link";
 
-import AuthContext from "../../../context/AuthContext";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+import AuthContext from "@/context/AuthContext";
 const RootLayout = dynamic(
-  () => import("../../../components/layouts/RootLayout"),
+  () => import("../../components/layouts/RootLayout"),
   {
     ssr: false,
   }
