@@ -147,7 +147,7 @@ const Register = () => {
             <Button
               onClick={() =>
                 signIn("github", {
-                  callbackUrl: "http://localhost:3000/",
+                  callbackUrl: callbackUrl || "http://localhost:3000",
                 })
               }
               type="default"
@@ -159,7 +159,7 @@ const Register = () => {
             <Button
               onClick={() =>
                 signIn("google", {
-                  callbackUrl: "http://localhost:3000/",
+                  callbackUrl: callbackUrl || "http://localhost:3000",
                 })
               }
               type="danger"

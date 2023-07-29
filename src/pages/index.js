@@ -19,7 +19,7 @@ const HomePage = ({ products }) => {
       <HeroSection />
       <AllProducts products={products} />
       <Category category={category} />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };

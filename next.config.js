@@ -30,6 +30,7 @@ const nextConfig = {
       "www.techlandbd.com",
       "www.elnekhelytechnology.com",
       "www.pngmart.com",
+      "e7.pngegg.com",
     ],
   },
 };

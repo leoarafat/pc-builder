@@ -44,6 +44,16 @@ export default async function auth(req, res) {
       }),
     ],
 
+    // callbacks: {
+    //   async jwt({ token, account, profile }) {
+    //     if (account) {
+    //       token.accessToken = account.access_token;
+    //       token.id = profile.id;
+    //     }
+    //     return token;
+    //   },
+    // },
+
     pages: {
       signIn: "/login",
     },
