@@ -23,8 +23,7 @@ const RootLayout = dynamic(
 );
 const Register = () => {
   const { control, handleSubmit } = useForm();
-  const { error, registerUser, clearErrors, user, loading } =
-    useContext(AuthContext);
+  const { error, registerUser, loading } = useContext(AuthContext);
   const router = useRouter();
   const onSubmit = (data) => {
     registerUser({
@@ -147,7 +146,7 @@ const Register = () => {
             <Button
               onClick={() =>
                 signIn("github", {
-                  callbackUrl: callbackUrl || `${process.env.API_URL}`,
+                  callbackUrl: `${process.env.API_URL}`,
                 })
               }
               type="default"

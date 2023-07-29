@@ -24,11 +24,12 @@ const RootLayout = dynamic(
 const ProductList = ({ data }) => {
   const { addProduct } = useProductContext();
 
-  // const router = useRouter();
+  const router = useRouter();
   // const id = router.query.id;
   // const { data } = useGetCategoryByNameQuery(id);
-  const products = data?.category?.products;
-
+  console.log(data);
+  const products = data?.products;
+  console.log(products);
   const handleAdd = (product) => {
     addProduct(product);
     router.push("/pc-builder");
@@ -85,7 +86,7 @@ const ProductList = ({ data }) => {
                 minWidth:
                   "clamp(0px, (calc(var(--stack-point) - 2 * var(--Card-padding) - 2 * var(--variant-borderWidth, 0px)) + 1px - 100%) * 999, 100%)",
               },
-              // make the card resizable for demo
+
               overflow: "auto",
               resize: "horizontal",
             }}
@@ -175,8 +176,9 @@ ProductList.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>;
 };
 export const getServerSideProps = async (context) => {
-  const { id } = context.query;
-  const res = await fetch(`${process.env.API_URL}/api/categories`);
+  const id = context.query.id;
+
+  const res = await fetch(`${process.env.API_URL}/categories`);
   const categories = await res.json();
   const data =
     categories?.category?.find((product) => product._id === id) || null;

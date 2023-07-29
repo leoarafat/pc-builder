@@ -9,7 +9,6 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/joy/Button";
 import Add from "@mui/icons-material/Add";
-
 import { useGetCategoryQuery } from "@/redux/features/category/categoryApi";
 import Link from "next/link";
 import { useProductContext } from "@/context/ProductContext";
@@ -18,26 +17,26 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { usePostProductsMutation } from "@/redux/features/order/orderSlice";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
-import { api } from "@/redux/features/category/categoryApi";
 import Loading from "@/components/ui/Loading";
 
-import { useEffect } from "react";
 const RootLayout = dynamic(
   () => import("../../components/layouts/RootLayout"),
   {
     ssr: false,
   }
 );
+
 export default function PcBuilderPage() {
   // console.log(data);
   const { data } = useGetCategoryQuery(null);
+  console.log(data);
   const [postSelectedProducts, { isLoading, isSuccess, isError, error }] =
     usePostProductsMutation();
   const router = useRouter();
   const { selectedProducts, removeProduct } = useProductContext();
 
   const rows = data?.category;
-
+  console.log(rows);
   const selectedCategories = Object.keys(selectedProducts);
   const allCategoriesSelected =
     rows?.every((row) => selectedCategories.includes(row.categories_name)) &&
@@ -147,20 +146,3 @@ export default function PcBuilderPage() {
 PcBuilderPage.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>;
 };
-// export async function getServerSideProps() {
-//   try {
-//     const { data } = await api.endpoints.getCategory.query().unwrap();
-
-//     return {
-//       props: {
-//         data,
-//       },
-//     };
-//   } catch (error) {
-//     return {
-//       props: {
-//         data: null,
-//       },
-//     };
-//   }
-// }

@@ -23,15 +23,13 @@ const RootLayout = dynamic(
 const Login = () => {
   const { control, handleSubmit } = useForm();
   const router = useRouter();
-  const { callbackUrl } = router.query;
   const onSubmit = async (e) => {
     const data = await signIn("credentials", {
       email: e?.email,
       password: e?.password,
       redirect: false,
-      callbackUrl,
     });
-    console.log(data);
+
     if (data?.error) {
       toast.error(data?.error);
     }
@@ -111,7 +109,7 @@ const Login = () => {
             <Button
               onClick={() =>
                 signIn("github", {
-                  callbackUrl: callbackUrl || `${process.env.API_URL}`,
+                  callbackUrl: `${process.env.API_URL}`,
                 })
               }
               type="default"
