@@ -17,7 +17,7 @@ export function ProductProvider({ children }) {
 
   const addProduct = (product) => {
     const category = product?.category;
-    console.log(category, "ccc");
+
     setSelectedProducts((prevSelectedProducts) => {
       const updatedSelectedProducts = { ...prevSelectedProducts };
 
@@ -33,8 +33,9 @@ export function ProductProvider({ children }) {
             ...updatedSelectedProducts[category],
             product,
           ];
+          toast.success("Product Added");
         } else {
-          toast.error("Already Added");
+          toast.error("Already Added This Item");
         }
       }
 
@@ -45,8 +46,6 @@ export function ProductProvider({ children }) {
 
       return updatedSelectedProducts;
     });
-
-    toast.success("Product Added");
   };
 
   const removeProduct = (category, productName) => {
@@ -66,8 +65,6 @@ export function ProductProvider({ children }) {
 
       return updatedSelectedProducts;
     });
-
-    toast.success("Product Removed");
   };
   const removeAllProducts = () => {
     setSelectedProducts({});

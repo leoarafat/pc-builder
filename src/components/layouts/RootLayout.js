@@ -27,6 +27,7 @@ import ImportantDevicesIcon from "@mui/icons-material/ImportantDevices";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useGetCategoryQuery } from "@/redux/features/category/categoryApi";
+
 const Navbar = ({ children }) => {
   const { data: categoryItem } = useGetCategoryQuery(null);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -63,6 +64,11 @@ const Navbar = ({ children }) => {
   }, [data, setUser]);
 
   const navItems = [
+    {
+      text: "Home",
+      icon: <HomeIcon style={{ color: "#f1f8e9" }} />,
+      path: "/",
+    },
     {
       text: "PC Builder",
       icon: <ImportantDevicesIcon style={{ color: "#f1f8e9" }} />,

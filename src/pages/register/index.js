@@ -14,6 +14,7 @@ import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import AuthContext from "@/context/AuthContext";
+import { signIn } from "next-auth/react";
 const RootLayout = dynamic(
   () => import("../../components/layouts/RootLayout"),
   {
@@ -143,10 +144,28 @@ const Register = () => {
             </Link>
           </p>
           <div>
-            <Button type="default" icon={<GithubOutlined />} size="large">
+            <Button
+              onClick={() =>
+                signIn("github", {
+                  callbackUrl: "http://localhost:3000/",
+                })
+              }
+              type="default"
+              icon={<GithubOutlined />}
+              size="large"
+            >
               Sign up with GitHub
             </Button>
-            <Button type="danger" icon={<GoogleOutlined />} size="large">
+            <Button
+              onClick={() =>
+                signIn("google", {
+                  callbackUrl: "http://localhost:3000/",
+                })
+              }
+              type="danger"
+              icon={<GoogleOutlined />}
+              size="large"
+            >
               Sign up with Google
             </Button>
           </div>

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import * as React from "react";
 import AspectRatio from "@mui/joy/AspectRatio";
 import Box from "@mui/joy/Box";
@@ -13,7 +14,7 @@ import { useRouter } from "next/router";
 import { useProductContext } from "@/context/ProductContext";
 import { toast } from "react-hot-toast";
 import Image from "next/image";
-
+import { api } from "../../redux/api/apiSlice";
 const RootLayout = dynamic(
   () => import("../../components/layouts/RootLayout"),
   {
@@ -22,6 +23,7 @@ const RootLayout = dynamic(
 );
 const ProductList = () => {
   const { addProduct } = useProductContext();
+
   const router = useRouter();
   const id = router.query.id;
   const { data } = useGetCategoryByNameQuery(id);
@@ -172,3 +174,24 @@ export default ProductList;
 ProductList.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>;
 };
+// export async function getServerSideProps(context) {
+//   const id = context.params.id;
+//   console.log(id);
+
+//   try {
+//     const { data } = await useGetCategoryByNameQuery(id).unwrap();
+//     console.log(data, "Data");
+//     return {
+//       props: {
+//         data: null,
+//       },
+//     };
+//   } catch (error) {
+//     console.error("Error fetching data:", error);
+//     return {
+//       props: {
+//         data: null,
+//       },
+//     };
+//   }
+// }

@@ -90,7 +90,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { usePostProductsMutation } from "@/redux/features/order/orderSlice";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
+import { api } from "@/redux/features/category/categoryApi";
 import Loading from "@/components/ui/Loading";
+
+import { useEffect } from "react";
 const RootLayout = dynamic(
   () => import("../../components/layouts/RootLayout"),
   {
@@ -98,11 +101,13 @@ const RootLayout = dynamic(
   }
 );
 export default function PcBuilderPage() {
+  // console.log(data);
   const { data } = useGetCategoryQuery(null);
-  const router = useRouter();
-  const { selectedProducts, removeProduct } = useProductContext();
   const [postSelectedProducts, { isLoading, isSuccess, isError, error }] =
     usePostProductsMutation();
+  const router = useRouter();
+  const { selectedProducts, removeProduct } = useProductContext();
+
   const rows = data?.category;
 
   const selectedCategories = Object.keys(selectedProducts);
@@ -143,7 +148,6 @@ export default function PcBuilderPage() {
   }
   if (isError) {
     toast.error(`${error.data.error}`);
-    console.log(error);
   }
   if (isLoading) {
     <Loading />;
@@ -183,7 +187,7 @@ export default function PcBuilderPage() {
                     selectedProducts[row?.categories_name].map((p) => (
                       <React.Fragment key={p?.name}>
                         <p>{p?.name}</p>
-                        <p>{p?.price}</p>
+                        <p>$ {p?.price}</p>
                         <IconButton
                           onClick={() => handleRemove(p?.category, p?.name)}
                           align="right"
@@ -215,3 +219,20 @@ export default function PcBuilderPage() {
 PcBuilderPage.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>;
 };
+// export async function getServerSideProps() {
+//   try {
+//     const { data } = await api.endpoints.getCategory.query().unwrap();
+
+//     return {
+//       props: {
+//         data,
+//       },
+//     };
+//   } catch (error) {
+//     return {
+//       props: {
+//         data: null,
+//       },
+//     };
+//   }
+// }

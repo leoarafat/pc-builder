@@ -1,8 +1,8 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
-
 import GithubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
 import dbConnect from "../../../../backend/config/dbConnenct";
 import User from "../../../../backend/models/user";
 
@@ -15,6 +15,10 @@ export default async function auth(req, res) {
       GithubProvider({
         clientId: process.env.GITHUB_ID,
         clientSecret: process.env.GITHUB_SECRET,
+      }),
+      GoogleProvider({
+        clientId: process.env.GOOGLE_ID,
+        clientSecret: process.env.GOOGLE_SECRET,
       }),
       CredentialsProvider({
         async authorize(credentials, req) {

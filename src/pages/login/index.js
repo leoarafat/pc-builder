@@ -12,6 +12,7 @@ import Link from "next/link"; // Import Link from Next.js
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
 import { toast } from "react-hot-toast";
+
 import dynamic from "next/dynamic";
 const RootLayout = dynamic(
   () => import("../../components/layouts/RootLayout"),
@@ -107,10 +108,28 @@ const Login = () => {
             </Link>
           </p>
           <div>
-            <Button type="danger" icon={<GoogleOutlined />} size="large">
+            <Button
+              onClick={() =>
+                signIn("google", {
+                  callbackUrl: "http://localhost:3000/",
+                })
+              }
+              type="danger"
+              icon={<GoogleOutlined />}
+              size="large"
+            >
               Login with Google
             </Button>
-            <Button type="default" icon={<GithubOutlined />} size="large">
+            <Button
+              onClick={() =>
+                signIn("github", {
+                  callbackUrl: "http://localhost:3000/",
+                })
+              }
+              type="default"
+              icon={<GithubOutlined />}
+              size="large"
+            >
               Login with GitHub
             </Button>
           </div>
