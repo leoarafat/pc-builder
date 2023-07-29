@@ -20,11 +20,11 @@ const RootLayout = dynamic(
     ssr: false,
   }
 );
-const CategoryProducts = () => {
+const CategoryProducts = ({ data }) => {
   const router = useRouter();
   const id = router.query.id;
 
-  const { data, error, isLoading } = useGetCategoryByNameQuery(id);
+  // const { data, error, isLoading } = useGetCategoryByNameQuery(id);
   console.log(data);
   const products = data?.category?.products;
 
@@ -125,4 +125,22 @@ const CategoryProducts = () => {
 export default CategoryProducts;
 CategoryProducts.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>;
+};
+export async function getStaticPaths() {
+  const res = await fetch(`${process.env.API_URL}/api/categories`);
+  const products = await res.json();
+
+  const paths = products.category.map((post) => ({
+    params: { id: post._id.toString() },
+  }));
+
+  return { paths, fallback: false };
+}
+
+export const getStaticProps = async (context) => {
+  const id = context.params.id;
+
+  const res = await fetch(`${process.env.API_URL}/api/categories/${id}`);
+  const data = await res.json();
+  return { props: { data } };
 };
