@@ -115,7 +115,7 @@ const Login = () => {
             <Button
               onClick={() =>
                 signIn("google", {
-                  callbackUrl: callbackUrl || "http://localhost:3000",
+                  callbackUrl: callbackUrl || `${process.env.API_URL}`,
                 })
               }
               type="danger"
@@ -127,7 +127,7 @@ const Login = () => {
             <Button
               onClick={() =>
                 signIn("github", {
-                  callbackUrl: callbackUrl || "http://localhost:3000",
+                  callbackUrl: callbackUrl || `${process.env.API_URL}`,
                 })
               }
               type="default"

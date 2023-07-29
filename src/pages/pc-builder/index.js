@@ -160,7 +160,7 @@ export default function PcBuilderPage() {
         variant="outlined"
         color="primary"
       >
-        Add to Cart
+        Complete Build
       </Button>
       <Button variant="outlined" color="primary">
         Total Price: ${getTotalPrice()}

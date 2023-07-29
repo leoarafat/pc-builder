@@ -4,7 +4,8 @@ const nextConfig = {
   env: {
     NEXTAUTH_SECRET: "arafatwithmahi",
     NEXTAUTH_URL: "http://localhost:3000",
-    DB_URL: "mongodb://localhost:27017/pc-builder",
+    DB_URL:
+      "mongodb+srv://pc-builder:dlaLug8YHE7HgqDn@cluster0.tjc9clz.mongodb.net/pc-builder?retryWrites=true&w=majority",
     API_URL: "http://localhost:3000",
     GITHUB_ID: "067f91b58f80d023d7db",
     GITHUB_SECRET: "5728be7278536844147c6aad200b7ccf06a7b062",
