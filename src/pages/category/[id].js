@@ -1,4 +1,3 @@
-import { useGetCategoryByNameQuery } from "@/redux/features/category/categoryApi";
 import { useRouter } from "next/router";
 import React from "react";
 import {
@@ -21,11 +20,6 @@ const RootLayout = dynamic(
   }
 );
 const CategoryProducts = ({ data }) => {
-  const router = useRouter();
-  const id = router.query.id;
-
-  // const { data, error, isLoading } = useGetCategoryByNameQuery(id);
-  console.log(data);
   const products = data?.category?.products;
 
   const cardHeight = 500;
@@ -128,10 +122,10 @@ CategoryProducts.getLayout = function getLayout(page) {
 };
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.API_URL}/api/categories`);
-  const products = await res.json();
+  const category = await res.json();
 
-  const paths = products.category.map((post) => ({
-    params: { id: post._id.toString() },
+  const paths = category.category.map((post) => ({
+    params: { id: post._id },
   }));
 
   return { paths, fallback: false };

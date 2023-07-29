@@ -112,13 +112,14 @@ export async function getStaticPaths() {
     params: { id: post._id.toString() },
   }));
 
-  return { paths, fallback: false };
+  return { paths, fallback: true };
 }
 
 export const getStaticProps = async (context) => {
   const id = context.params.id;
-
+  console.log(process.env.API_URL);
   const res = await fetch(`${process.env.API_URL}/api/products/${id}`);
+  console.log(res, "Response data");
   const product = await res.json();
   return { props: { product } };
 };

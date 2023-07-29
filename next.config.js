@@ -2,16 +2,12 @@
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    NEXTAUTH_SECRET: "arafatwithmahi",
-    NEXTAUTH_URL: "http://localhost:3000",
-    DB_URL:
-      "mongodb+srv://pc-builder:dlaLug8YHE7HgqDn@cluster0.tjc9clz.mongodb.net/pc-builder?retryWrites=true&w=majority",
-    API_URL: "http://localhost:3000",
-    GITHUB_ID: "067f91b58f80d023d7db",
-    GITHUB_SECRET: "5728be7278536844147c6aad200b7ccf06a7b062",
-    GOOGLE_ID:
-      "352235711756-u5po56ooip9nu7dc57ulbjf1bcii59kq.apps.googleusercontent.com",
-    GOOGLE_SECRET: "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",
+    NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+    DB_URL: process.env.DB_URL,
+    API_URL: process.env.API_URL,
+    GITHUB_ID: process.env.GITHUB_ID,
+    GITHUB_SECRET: process.env.GITHUB_SECRET,
   },
   images: {
     domains: [

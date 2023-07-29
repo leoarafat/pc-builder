@@ -38,10 +38,6 @@ const Login = () => {
     if (data?.ok) {
       router.push("/");
     }
-    if (!data?.ok) {
-      toast.error("Something went wrong");
-    }
-    console.log(data);
   };
   return (
     <Row justify="center" align="middle" style={{ minHeight: "100vh" }}>
@@ -112,18 +108,6 @@ const Login = () => {
             </Link>
           </p>
           <div>
-            <Button
-              onClick={() =>
-                signIn("google", {
-                  callbackUrl: callbackUrl || `${process.env.API_URL}`,
-                })
-              }
-              type="danger"
-              icon={<GoogleOutlined />}
-              size="large"
-            >
-              Login with Google
-            </Button>
             <Button
               onClick={() =>
                 signIn("github", {

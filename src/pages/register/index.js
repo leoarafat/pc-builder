@@ -156,18 +156,6 @@ const Register = () => {
             >
               Sign up with GitHub
             </Button>
-            <Button
-              onClick={() =>
-                signIn("google", {
-                  callbackUrl: callbackUrl || `${process.env.API_URL}`,
-                })
-              }
-              type="danger"
-              icon={<GoogleOutlined />}
-              size="large"
-            >
-              Sign up with Google
-            </Button>
           </div>
         </Card>
       </Col>

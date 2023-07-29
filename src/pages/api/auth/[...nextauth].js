@@ -16,10 +16,7 @@ export default async function auth(req, res) {
         clientId: process.env.GITHUB_ID,
         clientSecret: process.env.GITHUB_SECRET,
       }),
-      GoogleProvider({
-        clientId: process.env.GOOGLE_ID,
-        clientSecret: process.env.GOOGLE_SECRET,
-      }),
+
       CredentialsProvider({
         async authorize(credentials, req) {
           dbConnect();
@@ -43,16 +40,6 @@ export default async function auth(req, res) {
         },
       }),
     ],
-
-    // callbacks: {
-    //   async jwt({ token, account, profile }) {
-    //     if (account) {
-    //       token.accessToken = account.access_token;
-    //       token.id = profile.id;
-    //     }
-    //     return token;
-    //   },
-    // },
 
     pages: {
       signIn: "/login",

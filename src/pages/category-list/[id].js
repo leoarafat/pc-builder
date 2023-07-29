@@ -21,12 +21,12 @@ const RootLayout = dynamic(
     ssr: false,
   }
 );
-const ProductList = () => {
+const ProductList = ({ data }) => {
   const { addProduct } = useProductContext();
 
-  const router = useRouter();
-  const id = router.query.id;
-  const { data } = useGetCategoryByNameQuery(id);
+  // const router = useRouter();
+  // const id = router.query.id;
+  // const { data } = useGetCategoryByNameQuery(id);
   const products = data?.category?.products;
 
   const handleAdd = (product) => {
@@ -174,24 +174,14 @@ export default ProductList;
 ProductList.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>;
 };
-// export async function getServerSideProps(context) {
-//   const id = context.params.id;
-//   console.log(id);
+export const getServerSideProps = async (context) => {
+  const { id } = context.query;
+  const res = await fetch(`${process.env.API_URL}/api/categories`);
+  const categories = await res.json();
+  const data =
+    categories?.category?.find((product) => product._id === id) || null;
 
-//   try {
-//     const { data } = await useGetCategoryByNameQuery(id).unwrap();
-//     console.log(data, "Data");
-//     return {
-//       props: {
-//         data: null,
-//       },
-//     };
-//   } catch (error) {
-//     console.error("Error fetching data:", error);
-//     return {
-//       props: {
-//         data: null,
-//       },
-//     };
-//   }
-// }
+  return {
+    props: { data },
+  };
+};
