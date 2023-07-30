@@ -9,6 +9,7 @@ const RootLayout = dynamic(() => import("../components/layouts/RootLayout"), {
   ssr: false,
 });
 const HomePage = ({ products, category }) => {
+  // console.log(category);
   return (
     <div>
       <HeroSection />

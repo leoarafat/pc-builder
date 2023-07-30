@@ -8,6 +8,7 @@ import {
   Grid,
   TextField,
   Button,
+  Rating,
 } from "@mui/material";
 import dynamic from "next/dynamic";
 const RootLayout = dynamic(
@@ -85,11 +86,19 @@ const ProductDetails = ({ product }) => {
               </Typography>
               <Typography variant="body1" gutterBottom>
                 <strong>Individual Rating:</strong>{" "}
-                {product.product.individual_rating}
+                <Rating
+                  value={product.product.individual_rating}
+                  precision={0.5}
+                  readOnly
+                />
               </Typography>
               <Typography variant="body1" gutterBottom>
                 <strong>Average Rating:</strong>{" "}
-                {product.product.average_rating}
+                <Rating
+                  value={product.product.average_rating}
+                  precision={0.5}
+                  readOnly
+                />
               </Typography>
               <Typography variant="body1" gutterBottom>
                 <strong>Description:</strong> {product.product.description}

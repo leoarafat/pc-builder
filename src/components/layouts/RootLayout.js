@@ -30,6 +30,7 @@ import { useGetCategoryQuery } from "@/redux/features/category/categoryApi";
 
 const Navbar = ({ children }) => {
   const { data: categoryItem } = useGetCategoryQuery(null);
+  console.log(categoryItem);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const { setUser } = useContext(AuthContext);
@@ -39,8 +40,8 @@ const Navbar = ({ children }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const theme = useTheme();
   const isXs = useMediaQuery(theme.breakpoints.down("xs"));
-  const isSm = useMediaQuery(theme.breakpoints.between("sm", "md"));
-  const isLg = useMediaQuery(theme.breakpoints.up("lg"));
+  const isSm = useMediaQuery(theme.breakpoints.between("xs", "sm", "md"));
+  const isLg = useMediaQuery(theme.breakpoints.up("md", "lg"));
 
   const toggleDrawer = (open) => (event) => {
     if (

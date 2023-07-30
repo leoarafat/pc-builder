@@ -9,6 +9,7 @@ import {
   Grid,
   TextField,
   Button,
+  Rating,
 } from "@mui/material";
 import dynamic from "next/dynamic";
 import { useState } from "react";
@@ -93,10 +94,20 @@ const CategoryProductDetails = () => {
                 <strong>Status:</strong> {product?.status}
               </Typography>
               <Typography variant="body1" gutterBottom>
-                <strong>Individual Rating:</strong> {product?.individual_rating}
+                <strong>Individual Rating:</strong>{" "}
+                <Rating
+                  value={product.individual_rating}
+                  precision={0.5}
+                  readOnly
+                />
               </Typography>
               <Typography variant="body1" gutterBottom>
-                <strong>Average Rating:</strong> {product?.average_rating}
+                <strong>Average Rating:</strong>{" "}
+                <Rating
+                  value={product.average_rating}
+                  precision={0.5}
+                  readOnly
+                />
               </Typography>
               <Typography variant="body1" gutterBottom>
                 <strong>Description:</strong> {product?.description}
