@@ -144,7 +144,7 @@ const ProductList = ({ data }) => {
                     Average Rating
                   </Typography>
                   <Typography fontWeight="lg">
-                    {product.average_rating}
+                    {product?.average_rating}
                   </Typography>
                 </div>
               </Sheet>

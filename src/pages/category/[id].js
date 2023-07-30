@@ -9,6 +9,7 @@ import {
   CardMedia,
   Grid,
   Button,
+  Rating,
 } from "@mui/material";
 
 import Link from "next/link";
@@ -96,7 +97,12 @@ const CategoryProducts = ({ data }) => {
                       marginBottom: "0.5rem",
                     }}
                   >
-                    Rating: {product.average_rating}
+                    Rating:{" "}
+                    <Rating
+                      value={product?.average_rating}
+                      precision={0.5}
+                      readOnly
+                    />
                   </Typography>
 
                   <Link href={`/category-details/${product.id}`} passHref>

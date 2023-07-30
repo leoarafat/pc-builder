@@ -8,10 +8,10 @@ import {
   CardMedia,
   Grid,
   Button,
+  Rating,
 } from "@mui/material";
 
 import Link from "next/link";
-import { useSession } from "next-auth/react";
 
 const AllProducts = ({ products }) => {
   const cardHeight = 500;
@@ -89,7 +89,12 @@ const AllProducts = ({ products }) => {
                       marginBottom: "0.5rem",
                     }}
                   >
-                    Rating: {product.average_rating}
+                    Rating:{" "}
+                    <Rating
+                      value={product?.average_rating}
+                      precision={0.5}
+                      readOnly
+                    />
                   </Typography>
 
                   <Link href={`/products/${product._id}`} passHref>

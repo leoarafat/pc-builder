@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import dynamic from "next/dynamic";
 import { useState } from "react";
+import Loading from "@/components/ui/Loading";
 const RootLayout = dynamic(
   () => import("../../components/layouts/RootLayout"),
   {
@@ -28,7 +29,7 @@ const CategoryProductDetails = () => {
   });
   const router = useRouter();
   const id = router.query.id;
-  const { data } = useGetCategoryProductQuery(id);
+  const { data, isLoading } = useGetCategoryProductQuery(id);
 
   const product = data?.product;
 
@@ -39,10 +40,12 @@ const CategoryProductDetails = () => {
 
   const handleReviewSubmit = () => {
     const newReview = { ...userReview };
-    product.product.reviews.push(newReview);
+    product?.product?.reviews.push(newReview);
     setUserReview({ author: "", rating: 0, comment: "" });
   };
-
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <Box
       style={{
@@ -96,7 +99,7 @@ const CategoryProductDetails = () => {
               <Typography variant="body1" gutterBottom>
                 <strong>Individual Rating:</strong>{" "}
                 <Rating
-                  value={product.individual_rating}
+                  value={product?.individual_rating}
                   precision={0.5}
                   readOnly
                 />
@@ -104,7 +107,7 @@ const CategoryProductDetails = () => {
               <Typography variant="body1" gutterBottom>
                 <strong>Average Rating:</strong>{" "}
                 <Rating
-                  value={product.average_rating}
+                  value={product?.average_rating}
                   precision={0.5}
                   readOnly
                 />
@@ -180,3 +183,23 @@ export default CategoryProductDetails;
 CategoryProductDetails.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>;
 };
+// export async function getStaticPaths() {
+//   const res = await fetch(`${process.env.API_URL}/api/categories`);
+//   const products = await res.json();
+
+//   const paths = products.map((post) => ({
+//     params: { id: post.id.toString() },
+//   }));
+
+//   return { paths, fallback: true };
+// }
+
+// export const getStaticProps = async (context) => {
+//   const id = context.params.id;
+//   const res = await fetch(
+//     `${process.env.API_URL}/api/category-product-details/${id}`
+//   );
+//   console.log(res, "Response data");
+//   const data = await res.json();
+//   return { props: { data } };
+// };
