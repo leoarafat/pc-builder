@@ -11,8 +11,11 @@ import {
 } from "@mui/material";
 
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 const AllProducts = ({ products }) => {
+  const { data: session } = useSession();
+
   const cardHeight = 500;
   return (
     <Box
@@ -81,14 +84,29 @@ const AllProducts = ({ products }) => {
                   >
                     Status: {product.status}
                   </Typography>
-                  <Typography
-                    variant="body1"
-                    style={{
-                      marginBottom: "0.5rem",
-                    }}
-                  >
-                    Average Rating: {product.average_rating}
-                  </Typography>
+
+                  {session?.user ? (
+                    <Typography
+                      variant="body1"
+                      style={{
+                        marginBottom: "0.5rem",
+                      }}
+                    >
+                      Individual Rating: {individual_rating}
+                    </Typography>
+                  ) : (
+                    <>
+                      {" "}
+                      <Typography
+                        variant="body1"
+                        style={{
+                          marginBottom: "0.5rem",
+                        }}
+                      >
+                        Average Rating: {product.average_rating}
+                      </Typography>
+                    </>
+                  )}
 
                   <Link href={`/products/${product._id}`} passHref>
                     <Button

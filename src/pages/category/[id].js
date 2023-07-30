@@ -13,6 +13,7 @@ import {
 
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { useSession } from "next-auth/react";
 const RootLayout = dynamic(
   () => import("../../components/layouts/RootLayout"),
   {
@@ -21,7 +22,7 @@ const RootLayout = dynamic(
 );
 const CategoryProducts = ({ data }) => {
   const products = data?.category?.products;
-
+  const { data: session } = useSession();
   const cardHeight = 500;
   return (
     <Box
@@ -88,14 +89,28 @@ const CategoryProducts = ({ data }) => {
                   >
                     Status: {product.status}
                   </Typography>
-                  <Typography
-                    variant="body1"
-                    style={{
-                      marginBottom: "0.5rem",
-                    }}
-                  >
-                    Average Rating: {product.average_rating}
-                  </Typography>
+                  {session?.user ? (
+                    <Typography
+                      variant="body1"
+                      style={{
+                        marginBottom: "0.5rem",
+                      }}
+                    >
+                      Individual Rating: {individual_rating}
+                    </Typography>
+                  ) : (
+                    <>
+                      {" "}
+                      <Typography
+                        variant="body1"
+                        style={{
+                          marginBottom: "0.5rem",
+                        }}
+                      >
+                        Average Rating: {product.average_rating}
+                      </Typography>
+                    </>
+                  )}
 
                   <Link href={`/category-details/${product.id}`} passHref>
                     <Button

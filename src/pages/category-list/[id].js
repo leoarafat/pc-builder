@@ -178,7 +178,7 @@ ProductList.getLayout = function getLayout(page) {
 export const getServerSideProps = async (context) => {
   const id = context.query.id;
 
-  const res = await fetch(`${process.env.API_URL}/categories`);
+  const res = await fetch(`${process.env.API_URL}/api/categories`);
   const categories = await res.json();
   const data =
     categories?.category?.find((product) => product._id === id) || null;
