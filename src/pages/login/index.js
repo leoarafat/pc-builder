@@ -23,6 +23,7 @@ const RootLayout = dynamic(
 const Login = () => {
   const { control, handleSubmit } = useForm();
   const router = useRouter();
+  const { callbackUrl } = router.query;
   const onSubmit = async (e) => {
     const data = await signIn("credentials", {
       email: e?.email,
@@ -109,7 +110,7 @@ const Login = () => {
             <Button
               onClick={() =>
                 signIn("github", {
-                  callbackUrl: `${process.env.API_URL}`,
+                  callbackUrl: callbackUrl || `${process.env.API_URL}`,
                 })
               }
               type="default"

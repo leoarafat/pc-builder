@@ -25,6 +25,7 @@ const Register = () => {
   const { control, handleSubmit } = useForm();
   const { error, registerUser, loading } = useContext(AuthContext);
   const router = useRouter();
+  const { callbackUrl } = router.query;
   const onSubmit = (data) => {
     registerUser({
       name: data?.name,
@@ -146,7 +147,7 @@ const Register = () => {
             <Button
               onClick={() =>
                 signIn("github", {
-                  callbackUrl: `${process.env.API_URL}`,
+                  callbackUrl: callbackUrl || `${process.env.API_URL}`,
                 })
               }
               type="default"
