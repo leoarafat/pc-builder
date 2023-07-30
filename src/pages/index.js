@@ -1,5 +1,4 @@
 import React from "react";
-
 import dynamic from "next/dynamic";
 import AllProducts from "@/components/Products/Products";
 import Category from "../pages/category/index";
@@ -10,8 +9,6 @@ const RootLayout = dynamic(() => import("../components/layouts/RootLayout"), {
   ssr: false,
 });
 const HomePage = ({ products, category }) => {
-  // const { data: category } = useGetCategoryQuery(null);
-
   return (
     <div>
       <HeroSection />

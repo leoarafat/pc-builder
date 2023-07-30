@@ -28,12 +28,13 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useGetCategoryQuery } from "@/redux/features/category/categoryApi";
 
-const Navbar = ({ children, categoryItem }) => {
-  // const { data: categoryItem } = useGetCategoryQuery(null);
+const Navbar = ({ children }) => {
+  const { data: categoryItem } = useGetCategoryQuery(null);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const { user, setUser } = useContext(AuthContext);
+  const { setUser } = useContext(AuthContext);
   const { data } = useSession();
+
   const { data: session } = useSession();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const theme = useTheme();
@@ -271,9 +272,3 @@ const Navbar = ({ children, categoryItem }) => {
 };
 
 export default Navbar;
-export const getStaticProps = async () => {
-  const catRes = await fetch(`${process.env.API_URL}/api/categories`);
-  const categoryItem = await catRes.json();
-
-  return { props: { categoryItem } };
-};

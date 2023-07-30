@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Typography,
@@ -6,6 +6,8 @@ import {
   CardContent,
   CardMedia,
   Grid,
+  TextField,
+  Button,
 } from "@mui/material";
 import dynamic from "next/dynamic";
 const RootLayout = dynamic(
@@ -15,6 +17,22 @@ const RootLayout = dynamic(
   }
 );
 const ProductDetails = ({ product }) => {
+  const [userReview, setUserReview] = useState({
+    author: "",
+    rating: 0,
+    comment: "",
+  });
+
+  const handleReviewChange = (event) => {
+    const { name, value } = event.target;
+    setUserReview((prevReview) => ({ ...prevReview, [name]: value }));
+  };
+
+  const handleReviewSubmit = () => {
+    const newReview = { ...userReview };
+    product.product.reviews.push(newReview);
+    setUserReview({ author: "", rating: 0, comment: "" });
+  };
   return (
     <Box
       style={{
@@ -94,6 +112,49 @@ const ProductDetails = ({ product }) => {
           </Card>
         </Grid>
       </Grid>
+      {/* Review Form */}
+      <Box mt={4}>
+        <Typography variant="h6" component="h2" gutterBottom>
+          Add Your Review:
+        </Typography>
+        <TextField
+          label="Author"
+          variant="outlined"
+          fullWidth
+          name="author"
+          value={userReview.author}
+          onChange={handleReviewChange}
+          margin="normal"
+        />
+        <TextField
+          label="Rating"
+          variant="outlined"
+          fullWidth
+          name="rating"
+          type="number"
+          value={userReview.rating}
+          onChange={handleReviewChange}
+          margin="normal"
+        />
+        <TextField
+          label="Comment"
+          variant="outlined"
+          fullWidth
+          name="comment"
+          value={userReview.comment}
+          onChange={handleReviewChange}
+          margin="normal"
+          multiline
+          rows={4}
+        />
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleReviewSubmit}
+        >
+          Submit Review
+        </Button>
+      </Box>
     </Box>
   );
 };

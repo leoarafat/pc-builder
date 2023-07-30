@@ -89,28 +89,15 @@ const CategoryProducts = ({ data }) => {
                   >
                     Status: {product.status}
                   </Typography>
-                  {session?.user ? (
-                    <Typography
-                      variant="body1"
-                      style={{
-                        marginBottom: "0.5rem",
-                      }}
-                    >
-                      Individual Rating: {individual_rating}
-                    </Typography>
-                  ) : (
-                    <>
-                      {" "}
-                      <Typography
-                        variant="body1"
-                        style={{
-                          marginBottom: "0.5rem",
-                        }}
-                      >
-                        Average Rating: {product.average_rating}
-                      </Typography>
-                    </>
-                  )}
+
+                  <Typography
+                    variant="body1"
+                    style={{
+                      marginBottom: "0.5rem",
+                    }}
+                  >
+                    Rating: {product.average_rating}
+                  </Typography>
 
                   <Link href={`/category-details/${product.id}`} passHref>
                     <Button

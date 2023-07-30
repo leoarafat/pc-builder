@@ -1,38 +1,68 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### Project URL: https://pc-builder-eight.vercel.app
+
+# Build Your PC Project
+
+Welcome to the Build Your PC project! This is a Next.js and Redux-based web application that allows users to build their custom PCs by selecting products from various categories. Below, we'll outline the key features and functionalities of the project to help you get started.
+
+## Introduction
+
+Build Your PC is a web application designed to help users create their custom PCs by selecting products from various categories. The application is built using Next.js for server-side rendering and Redux for state management, providing a seamless and interactive user experience.
 
 ## Getting Started
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Homepage
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The homepage features a banner displaying some products along with a "Details" button. Clicking on the "Details" button allows users to view the product details on a separate page.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Product Details
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Clicking on the "Details" button of a product displays a page with comprehensive information about the selected product, including specifications, pricing, and more.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Category Navigation
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+The application provides various categories under the banner and product sections. By clicking on a category, users can explore the products available in that category and view their details.
 
-## Learn More
+## Protected Route - PC Builder
 
-To learn more about Next.js, take a look at the following resources:
+The "PC Builder" is a protected route that requires user authentication. To access this route, users must log in using their credentials. This route allows users to build their custom PCs step by step.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Building Your PC
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Within the "PC Builder" route, users can see the categories required to build a complete PC. Clicking on the "Choose" button next to each category takes them to the category route, where they can view the products available in that category.
 
-## Deploy on Vercel
+## Ordering Your PC
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+In the "PC Builder" route, users can add products from various categories to their PC build. Once they've selected products from all the necessary categories, the "Complete to build" button becomes visible. Clicking on this button orders the products and displays a success message.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Dependencies
+
+The Build Your PC project utilizes the following key dependencies:
+
+Next.js: For server-side rendering and fast, client-side navigation.
+Redux: For managing the application's state and handling complex data flows.
+React Redux: To connect React components with the Redux store.
+Axios: For making API requests to fetch product information.
+React Router: For handling client-side routing within the application.
+... (Add any other important dependencies used in the project)
+
+## How to Run
+
+To run the Build Your PC project locally, follow these steps:
+
+1. Clone this repository to your local machine.
+2. Navigate to the project's root directory using the command line or terminal.
+3. Install the required dependencies using `npm install`.
+4. Start the development server with `npm run dev`.
+5. Open your web browser and visit `http://localhost:3000` to access the application.
+
+## Contributing
+
+We welcome contributions to the Build Your PC project! If you find any issues, have suggestions for improvements, or want to add new features, please feel free to submit a pull request. Before contributing, please review the CONTRIBUTING.md file for guidelines.
+
+## License
+
+The Build Your PC project is open-source and licensed under the MIT License. You are free to use, modify, and distribute the code according to the terms of the MIT License.
+
+Thank you for using Build Your PC! We hope you enjoy building your custom PC with our application. If you have any questions or need support, please feel free to reach out to us. Happy PC building!
